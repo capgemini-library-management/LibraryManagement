@@ -1,4 +1,4 @@
-<H1>Todo</H1>
+<H1>CapgeminiLBS Entry</H1>
 
 <div class="container">
   <div class="alert alert-warning" *ngIf="todoForm.dirty && todoForm.invalid">Enter valid values</div>
@@ -7,14 +7,14 @@
   
   <form (ngSubmit)="!todoForm.invalid && saveTodo()" #todoForm="ngForm">
     <fieldset class="form-group">
-      <label>Description</label>
+      <label>Book Name</label>
       <input type="text" #description="ngModel" 
             [(ngModel)]="todo.description" class="form-control" 
                 name="description" required="required" minlength="5">
     </fieldset>
 
     <fieldset class="form-group">
-        <label>Target Date</label>
+        <label>Issued Date</label>
         <input type="date" #targetDate="ngModel"
         [ngModel]="todo.targetDate | date:'yyyy-MM-dd' "
         (ngModelChange)="todo.targetDate = $event"
