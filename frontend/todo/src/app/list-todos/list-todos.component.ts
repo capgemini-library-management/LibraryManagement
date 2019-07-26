@@ -1,6 +1,8 @@
 import { TodoDataService } from './../service/data/todo-data.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { WelcomeComponent } from '../welcome/welcome.component';
+import { LoginComponent } from '../login/login.component';
 
 export class Todo {
   constructor(
@@ -23,7 +25,7 @@ export class ListTodosComponent implements OnInit {
   todos: Todo[]
 
   message: string
-
+  
   // = [
   //   new Todo(1, 'Learn to Dance', false, new Date()),
   //   new Todo(2, 'Become an Expert at Angular', false, new Date()),
@@ -40,7 +42,8 @@ export class ListTodosComponent implements OnInit {
 
   constructor(
     private todoService:TodoDataService,
-    private router : Router
+    private router : Router,
+    private logInUSer: LoginComponent
   ) { }
 
   ngOnInit() {
@@ -48,8 +51,9 @@ export class ListTodosComponent implements OnInit {
   }
 
   refreshTodos(){
+    console.log(this.logInUSer.setLoggInUser)
     this.todoService.retrieveAllTodos('in28minutes').subscribe(
-    //this.todoService.retrieveAllTodos('CapgeminiLBS').subscribe(
+    //this.todoService.retrieveAllTodos(userName).subscribe(
       response => {
         console.log(response);
         this.todos = response;

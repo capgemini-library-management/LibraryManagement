@@ -2,6 +2,11 @@ import { BasicAuthenticationService } from './../service/basic-authentication.se
 import { HardcodedAuthenticationService } from './../service/hardcoded-authentication.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
 
 @Component({
   selector: 'app-login',
@@ -10,10 +15,11 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  username = 'Enter Valid Username' //CapgeminiLBS
-  password = '' //dummy
+  username = 'Enter Valid Username' //CapgeminiLBS , UserLBS
+  password = '' //dummy , password@!23@#!
   errorMessage = 'Invalid Credentials'
   invalidLogin = false
+  setLoggInUser = ''
 
   //Router
   //Angular.giveMeRouter
@@ -25,6 +31,11 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
+  loggUser()
+  {
+    return this.setLoggInUser
+  }
+  
   handleLogin() {
     // console.log(this.username);
     //if(this.username==="in28minutes" && this.password === 'dummy') {
@@ -32,6 +43,7 @@ export class LoginComponent implements OnInit {
       //Redirect to Welcome Page
       this.router.navigate(['welcome', this.username])
       this.invalidLogin = false
+      this.setLoggInUser =  this.username
     } else {
       this.invalidLogin = true
     }
@@ -45,7 +57,8 @@ export class LoginComponent implements OnInit {
           data => {
             console.log(data)
             this.router.navigate(['welcome', this.username])
-            this.invalidLogin = false      
+            this.invalidLogin = false
+            this.setLoggInUser =  this.username   
           },
           error => {
             console.log(error)
@@ -59,8 +72,10 @@ export class LoginComponent implements OnInit {
         .subscribe(
           data => {
             console.log(data)
+            console.log(this.username)
             this.router.navigate(['welcome', this.username])
-            this.invalidLogin = false      
+            this.invalidLogin = false 
+            this.setLoggInUser =  this.username    
           },
           error => {
             console.log(error)
