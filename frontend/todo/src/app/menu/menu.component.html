@@ -1,7 +1,9 @@
 <header>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        <div><a href="https://www.capgemini.com/" class="navbar-brand" target="_blank">
-            CapgeminiLBS</a></div>
+        <div>
+            <!-- <a *ngIf="!hardcodedAuthenticationService.isUserLoggedIn()" routerLink="/login" class="nav-link" class="navbar-brand">CapgeminiLBS</a> -->
+            <a *ngIf="!hardcodedAuthenticationService.isUserLoggedIn()" href="#" class="navbar-brand">CapgeminiLBS</a>
+        </div> 
 
         <ul class="navbar-nav">
             <li><a *ngIf="hardcodedAuthenticationService.isUserLoggedIn()" routerLink="/welcome/CapgeminiLBS" class="nav-link">Home</a></li>
