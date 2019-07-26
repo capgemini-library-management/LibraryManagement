@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class BasicAuthenticationController {
 
 	@GetMapping(path = "/basicauth")
-	public AuthenticationBean helloWorldBean() {
+	public AuthenticationBean helloWorldBean() {//For Auth
 		//throw new RuntimeException("Some Error has Happened! Contact Support at ***-***");
 		return new AuthenticationBean("You are authenticated");
 	}	
