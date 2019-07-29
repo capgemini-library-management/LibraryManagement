@@ -15,7 +15,7 @@ export class WelcomeDataService {
   ) { }
 
   executeHelloWorldBeanService() {
-    return this.http.get<HelloWorldBean>('http://localhost:8080/hello-world-bean');
+    return this.http.get<HelloWorldBean>('http://localhost:7070/hello-world-bean');
     //console.log("Execute Hello World Bean Service")
   }
   //http://localhost:8080/hello-world/path-variable/in28minutes
@@ -28,7 +28,7 @@ export class WelcomeDataService {
     //   })
 
     return this.http.get<HelloWorldBean>(
-      `http://localhost:8080/hello-world/path-variable/${name}`,
+      `http://localhost:7070/hello-world/path-variable/${name}`,
       //{headers}
       );
     //console.log("Execute Hello World Bean Service")
