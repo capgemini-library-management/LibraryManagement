@@ -4,7 +4,7 @@
   <div class="alert alert-warning" *ngIf="todoForm.dirty && todoForm.invalid">Enter valid values</div>
   <div class="alert alert-warning" *ngIf="todoForm.dirty && targetDate.invalid">Enter valid Issued Date</div>
   <div class="alert alert-warning" *ngIf="todoForm.dirty && description.invalid">Enter atleast 5 characters in Book Name</div>
-  <div class="alert alert-warning" *ngIf="todoForm.dirty && done.invalid">Enter True or False only</div>
+ 
   
   <form (ngSubmit)="!todoForm.invalid && saveTodo()" #todoForm="ngForm">
     <fieldset class="form-group">
