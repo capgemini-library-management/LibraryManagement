@@ -2,11 +2,7 @@ import { BasicAuthenticationService } from './../service/basic-authentication.se
 import { HardcodedAuthenticationService } from './../service/hardcoded-authentication.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Injectable } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root'
-})
 
 @Component({
   selector: 'app-login',
@@ -19,8 +15,8 @@ export class LoginComponent implements OnInit {
   password = '' //dummy , password@!23@#!
   errorMessage = 'Invalid Credentials'
   invalidLogin = false
-  setLoggInUser = ''
-
+  private loggInUser:string
+ 
   //Router
   //Angular.giveMeRouter
   //Dependency Injection
@@ -31,11 +27,17 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  loggUser()
-  {
-    return this.setLoggInUser
+  get LoggInUser() : string {
+    console.log("Get LoggInUser : ", this.loggInUser);
+    return this.loggInUser;
   }
-  
+
+  set LoggInUser(value : string) {
+    console.log("Set LoggInUser : ", value);
+    this.loggInUser = value;
+  } 
+
+    
   handleLogin() {
     // console.log(this.username);
     //if(this.username==="in28minutes" && this.password === 'dummy') {
@@ -43,7 +45,6 @@ export class LoginComponent implements OnInit {
       //Redirect to Welcome Page
       this.router.navigate(['welcome', this.username])
       this.invalidLogin = false
-      this.setLoggInUser =  this.username
     } else {
       this.invalidLogin = true
     }
@@ -57,8 +58,7 @@ export class LoginComponent implements OnInit {
           data => {
             console.log(data)
             this.router.navigate(['welcome', this.username])
-            this.invalidLogin = false
-            this.setLoggInUser =  this.username   
+            this.invalidLogin = false  
           },
           error => {
             console.log(error)
@@ -72,16 +72,16 @@ export class LoginComponent implements OnInit {
         .subscribe(
           data => {
             console.log(data)
-            console.log(this.username)
+            this.LoggInUser = this.username //Set method is called by initializing 
+            this.LoggInUser //Calling Get method
             this.router.navigate(['welcome', this.username])
             this.invalidLogin = false 
-            this.setLoggInUser =  this.username    
           },
           error => {
             console.log(error)
             this.invalidLogin = true
           }
         )
-  }
+      }
 
 }
