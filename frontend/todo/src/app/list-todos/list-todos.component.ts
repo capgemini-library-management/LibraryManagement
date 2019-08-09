@@ -1,8 +1,8 @@
 import { TodoDataService } from './../service/data/todo-data.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { WelcomeComponent } from '../welcome/welcome.component';
-import { LoginComponent } from '../login/login.component';
+import { BasicAuthenticationService } from '../service/basic-authentication.service';
+
 
 export class Todo {
   constructor(
@@ -25,6 +25,8 @@ export class ListTodosComponent implements OnInit {
   todos: Todo[]
 
   message: string
+  adminOrNot:string =''
+  userType = this.basicAuthenticationService.getAuthenticatedUser()
   
   // = [
   //   new Todo(1, 'Learn to Dance', false, new Date()),
@@ -43,17 +45,28 @@ export class ListTodosComponent implements OnInit {
   constructor(
     private todoService:TodoDataService,
     private router : Router,
-    private logInUSer: LoginComponent
-  ) { }
+    private basicAuthenticationService : BasicAuthenticationService
+  ) { 
+    console.log("UserType: "+this.userType)
+    if(this.userType === 'CapgeminiLBS')
+    {
+      this.adminOrNot = 'in28minutes' //admin
+    }
+    else
+    {
+      this.adminOrNot = 'CapgeminiLBS'
+    }
+  }
 
   ngOnInit() {
     this.refreshTodos();
   }
 
   refreshTodos(){
-    console.log(this.logInUSer.setLoggInUser)
-    this.todoService.retrieveAllTodos('in28minutes').subscribe(
-    //this.todoService.retrieveAllTodos(userName).subscribe(
+  
+    console.log('adminOrNot: '+this.adminOrNot)
+    this.todoService.retrieveAllTodos(this.adminOrNot).subscribe(
+    //this.todoService.retrieveAllTodos('in28minutes').subscribe(
       response => {
         console.log(response);
         this.todos = response;
