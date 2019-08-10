@@ -64,8 +64,8 @@ export class ListTodosComponent implements OnInit {
 
   refreshTodos(){
   
-    console.log('adminOrNot: '+this.adminOrNot)
-    this.todoService.retrieveAllTodos(this.adminOrNot).subscribe(
+    //console.log('adminOrNot: '+this.adminOrNot)
+    this.todoService.retrieveAllTodos(this.userType).subscribe(
     //this.todoService.retrieveAllTodos('in28minutes').subscribe(
       response => {
         console.log(response);
@@ -76,10 +76,10 @@ export class ListTodosComponent implements OnInit {
 
   deleteTodo(id) {
     console.log(`delete todo ${id}` )
-    this.todoService.deleteTodo('in28minutes', id).subscribe (
+    this.todoService.deleteTodo(this.userType, id).subscribe (
       response => {
         console.log(response);
-        this.message = `Delete of Todo ${id} Successful!`;
+        this.message = `Deleted Successfully`;
         this.refreshTodos();
       }
     )
