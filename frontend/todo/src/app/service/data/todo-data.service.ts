@@ -12,6 +12,11 @@ export class TodoDataService {
     private http:HttpClient
   ) { }
 
+  retrieveAllTodosId() {
+    return this.http.get<Todo[]>(`${TODO_JPA_API_URL}/users/todos`);
+    //console.log("Execute Hello World Bean Service")
+  }
+
   retrieveAllTodos(username) {
     return this.http.get<Todo[]>(`${TODO_JPA_API_URL}/users/${username}/todos`);
     //console.log("Execute Hello World Bean Service")

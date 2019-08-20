@@ -9,8 +9,8 @@
         <th>Book Name</th>
         <th>Issued Date</th>
         <th>Is Returned?</th>
-        <th>Update</th>
-        <th>Delete</th>
+        <th *ngIf = adminOrNot >Update</th>
+        <th *ngIf = adminOrNot >Delete</th>
       </tr>
     </thead>
     <tbody>
@@ -19,8 +19,8 @@
                 <td>{{todo.description}}</td>
                 <td>{{todo.targetDate | date | uppercase}}</td>
                 <td>{{todo.done}}</td>
-                <td><button (click)="updateTodo(todo.id)" class="btn btn-success">Update</button></td>
-                <td><button (click)="deleteTodo(todo.id)" class="btn btn-warning">Delete</button></td>
+                <td><button (click)="updateTodo(todo.id)" class="btn btn-success" *ngIf = adminOrNot >Update</button></td>
+                <td><button (click)="deleteTodo(todo.id)" class="btn btn-warning" *ngIf = adminOrNot >Delete</button></td>
               </tr>
       <!-- } -->
     </tbody>

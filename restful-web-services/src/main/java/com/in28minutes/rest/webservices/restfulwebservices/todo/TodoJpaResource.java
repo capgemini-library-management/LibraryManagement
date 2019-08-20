@@ -29,6 +29,12 @@ public class TodoJpaResource {
 	private TodoJpaRepository todoJpaRepository;
 
 	
+	@GetMapping("/jpa/users/todos")
+	public List<Todo> getAllTodosId(){
+		return todoJpaRepository.findAll();
+		//return todoService.findAll();
+	}
+	
 	@GetMapping("/jpa/users/{username}/todos")
 	public List<Todo> getAllTodos(@PathVariable String username){
 		return todoJpaRepository.findByUsername(username);

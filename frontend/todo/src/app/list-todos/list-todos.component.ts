@@ -25,7 +25,7 @@ export class ListTodosComponent implements OnInit {
   todos: Todo[]
 
   message: string
-  adminOrNot:string =''
+  adminOrNot:boolean = false
   userType = this.basicAuthenticationService.getAuthenticatedUser()
   
   // = [
@@ -50,11 +50,13 @@ export class ListTodosComponent implements OnInit {
     console.log("UserType: "+this.userType)
     if(this.userType === 'CapgeminiLBS')
     {
-      this.adminOrNot = 'in28minutes' //admin
+     // this.adminOrNot = 'CapgeminiLBS' //admin
+     this.adminOrNot = true
     }
     else
     {
-      this.adminOrNot = 'CapgeminiLBS'
+      //this.adminOrNot = 'UserLBS' //non-admin
+      this.adminOrNot = false
     }
   }
 
@@ -65,8 +67,8 @@ export class ListTodosComponent implements OnInit {
   refreshTodos(){
   
     //console.log('adminOrNot: '+this.adminOrNot)
-    this.todoService.retrieveAllTodos(this.userType).subscribe(
-    //this.todoService.retrieveAllTodos('in28minutes').subscribe(
+    //this.todoService.retrieveAllTodos(this.userType).subscribe(
+    this.todoService.retrieveAllTodosId().subscribe(
       response => {
         console.log(response);
         this.todos = response;
