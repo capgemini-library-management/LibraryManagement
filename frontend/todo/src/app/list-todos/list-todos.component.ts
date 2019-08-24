@@ -2,6 +2,7 @@ import { TodoDataService } from './../service/data/todo-data.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BasicAuthenticationService } from '../service/basic-authentication.service';
+import {MatTableDataSource} from '@angular/material/table';
 
 
 export class Todo {
@@ -21,12 +22,19 @@ export class Todo {
   styleUrls: ['./list-todos.component.css']
 })
 export class ListTodosComponent implements OnInit {
+  [x: string]: any;
 
   todos: Todo[]
-
+ 
   message: string
   adminOrNot:boolean = false
   userType = this.basicAuthenticationService.getAuthenticatedUser()
+  displayedColumns: string[] = ['Book Name', 'Issued Date', 'Returned','update','delete'];
+  dataSource:any
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
   
   // = [
   //   new Todo(1, 'Learn to Dance', false, new Date()),
@@ -63,6 +71,9 @@ export class ListTodosComponent implements OnInit {
   ngOnInit() {
     this.refreshTodos();
   }
+  public doFilter = (value: string) => {
+    this.dataSource.filter = value.trim().toLocaleLowerCase();
+  }
 
   refreshTodos(){
   
@@ -72,6 +83,7 @@ export class ListTodosComponent implements OnInit {
       response => {
         console.log(response);
         this.todos = response;
+        this.dataSource = new MatTableDataSource(this.todos);
       }
     )
   }

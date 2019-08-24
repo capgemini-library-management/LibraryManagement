@@ -2,9 +2,15 @@
 
 <div class="alert alert-success" *ngIf='message'>{{message}}</div>
 
+
 <div class="container">
-  <table class="table">
-    <thead>
+  <br>
+    <mat-form-field id="placestyle">
+        <mat-label></mat-label>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search Book" autofocus>
+    </mat-form-field>
+  <table class="mat-elevation-z8" mat-table [dataSource]="dataSource" >
+    <!-- <thead>
       <tr>
         <th>Book Name</th>
         <th>Issued Date</th>
@@ -17,18 +23,46 @@
         <!-- <dir-pagination-controls></dir-pagination-controls> -->
         <!-- https://www.folio3.com/blog/angularjs-grid-paging-sorting-filtering/ -->
       <!--   for (Todo todo: todos) {  -->
-              <tr *ngFor="let todo of todos">
-                <td>{{todo.description}}</td>
-                <td>{{todo.targetDate | date | uppercase}}</td>
+              <!-- <tr *ngFor="let todo of todos"> -->
+                
+                    <ng-container matColumnDef="Book Name">
+                      <th mat-header-cell *matHeaderCellDef> Name of Book </th>
+                      <!-- <td mat-cell *matCellDef="let element"> {{element.description}} </td> -->
+                      <td mat-cell *matCellDef="let todo">{{todo.description}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="Issued Date">
+                        <th mat-header-cell *matHeaderCellDef> Date Issued </th>
+                        <td mat-cell *matCellDef="let todo"> {{todo.targetDate | date | uppercase}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="Returned">
+                        <th mat-header-cell *matHeaderCellDef> Is Returned </th>
+                        <td mat-cell *matCellDef="let todo"> {{todo.done}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="update">
+                        <th mat-header-cell *matHeaderCellDef> Update </th>
+                        <td mat-cell *matCellDef="let todo"><button (click)="updateTodo(todo.id)" class="btn btn-success" *ngIf = adminOrNot >Update</button></td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="delete">
+                        <th mat-header-cell *matHeaderCellDef> Delete </th>
+                        <td mat-cell *matCellDef="let todo"><button (click)="deleteTodo(todo.id)" class="btn btn-warning" *ngIf = adminOrNot >Delete</button></td>
+                    </ng-container>
+                
+                <!-- 
                 <td>{{todo.done}}</td>
                 <td><button (click)="updateTodo(todo.id)" class="btn btn-success" *ngIf = adminOrNot >Update</button></td>
-                <td><button (click)="deleteTodo(todo.id)" class="btn btn-warning" *ngIf = adminOrNot >Delete</button></td>
-              </tr>
+                <td><button (click)="deleteTodo(todo.id)" class="btn btn-warning" *ngIf = adminOrNot >Delete</button></td> -->
+              <!-- </tr> -->
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       <!-- } -->
-    </tbody>
+    <!-- </tbody> -->
 
   </table>
-
+<br><br>
   <div class="row">
       <button (click)="addTodo()" class="btn btn-success">Add</button>
   </div>
