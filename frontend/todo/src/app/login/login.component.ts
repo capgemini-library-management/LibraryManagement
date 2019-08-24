@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  username = 'Enter Valid Username' //CapgeminiLBS , UserLBS
+  username = '' //CapgeminiLBS , UserLBS
   password = '' //dummy , password@!23@#!
   errorMessage = 'Invalid Credentials'
   invalidLogin = false
